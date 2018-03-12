@@ -9,6 +9,8 @@ OUTPUT_DIR=./api
 # Create the JSON directory.
 mkdir -p "$OUTPUT_DIR"
 
+echo "Creating JSON files"
+
 # Iterate through each line in the CSV file.
 while read -r p; do
 	FIPS_VALUE=$(echo "$p" | cut -d "," -f 1)

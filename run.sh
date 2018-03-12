@@ -1,4 +1,4 @@
-#/bin/bash
-echo "GNIS_ID,FIPS_CODE" > united-states.csv
-sed 1d NationalFedCodes.txt | cut -d "|" -f 1,4  >> united-states.csv
-sed -i -e "s/|/,/g" ./united-states.csv
+#!/bin/bash
+
+# Run each step in turn.
+bin/get_file.sh && bin/csv.sh && bin/api.sh && bin/upload.sh
