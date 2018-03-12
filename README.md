@@ -15,6 +15,8 @@ This data is available via an API, in the format `https://fipsgnis.com/FIPSCODE.
 
 The API consists of static files hosted on S3, provided via CloudFront, so there's no need to be gentle—query all you need, at whatever rate you need. But if you prefer something local and faster, you can generate your own copy.
 
+It's not yet possible to query by GNIS ID, only by FIPS code. But [that's planned](https://github.com/waldoj/FIPS-to-GNIS/issues/3).
+
 ## Generate Your Own CSV
 
 You can generate your own, more up-to-date version of this.
