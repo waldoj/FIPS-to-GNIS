@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Get the current filename from the USGS download page.
-FILENAME=$(curl -s https://geonames.usgs.gov/domestic/download_data.htm |egrep -o "\/docs\/federalcodes\/NationalFedCodes_[0-9]{8}.zip")
+FILENAME=$(curl -s https://www.usgs.gov/core-science-systems/ngp/board-on-geographic-names/download-gnis-data | egrep -o "\/docs\/federalcodes\/NationalFedCodes.zip")
 
 # Put together the URL for the file
 URL=https://geonames.usgs.gov"$FILENAME"
