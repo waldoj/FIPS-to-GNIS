@@ -17,4 +17,5 @@ while read -r p; do
 	GNIS_VALUE=$(echo "$p" | cut -d "," -f 2)
 	OUTPUT_FILE="$OUTPUT_DIR"/"$FIPS_VALUE".json
 	echo "{\"fips\":\"$FIPS_VALUE\",\"gnis\":\"$GNIS_VALUE\"}" > "$OUTPUT_FILE"
+	echo -n .
 done <$SOURCE_DATA
