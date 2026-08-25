@@ -11,11 +11,18 @@ mkdir -p "$OUTPUT_DIR"
 
 echo "Creating JSON files"
 
-# Iterate through each line in the CSV file.
-while read -r p; do
-	FIPS_VALUE=$(echo "$p" | cut -d "," -f 1)
-	GNIS_VALUE=$(echo "$p" | cut -d "," -f 2)
-	OUTPUT_FILE="$OUTPUT_DIR"/"$FIPS_VALUE".json
-	echo "{\"fips\":\"$FIPS_VALUE\",\"gnis\":\"$GNIS_VALUE\"}" > "$OUTPUT_FILE"
+# Iterate through each line in the CSV file. The columns are GNIS_ID,FIPS_CODE,
+# so field 1 is the GNIS feature ID (which becomes the filename) and field 2 is
+# the Census (FIPS) code.
+while IFS=, read -r GNIS_VALUE FIPS_VALUE; do
+
+	# Skip the header row, and any header rows embedded mid-file. (The source
+	# data concatenates per-state files, each with its own header.)
+	case "$GNIS_VALUE" in
+		''|*[!0-9]*) continue ;;
+	esac
+
+	OUTPUT_FILE="$OUTPUT_DIR"/"$GNIS_VALUE".json
+	echo "{\"gnis\":\"$GNIS_VALUE\",\"fips\":\"$FIPS_VALUE\"}" > "$OUTPUT_FILE"
 	echo -n .
 done <$SOURCE_DATA

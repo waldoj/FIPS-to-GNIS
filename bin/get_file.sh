@@ -9,7 +9,7 @@ echo Retreiving "$URL"
 curl -s "$URL" -o NationalFedCodes.zip
 
 # Extract the file's contents.
-unzip -p NationalFedCodes.zip > NationalFedCodes.txt
+unzip -p NationalFedCodes.zip 'Text/FederalCodes_*.txt' > NationalFedCodes.txt
 
 # Get rid of the ZIP file.
 rm NationalFedCodes.zip

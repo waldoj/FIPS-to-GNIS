@@ -9,7 +9,7 @@ echo "Creating CSV file"
 echo "GNIS_ID,FIPS_CODE" > "$CSV_FILE"
 
 # Skip the first line, pipe the 1st and 4th columns into the CSV file.
-sed 1d "$SOURCE_FILE" | cut -d "|" -f 1,4  >> "$CSV_FILE"
+awk -F'|' 'NF>=21 && $1+0>0 {print $1","$4}' "$SOURCE_FILE" >> "$CSV_FILE"
 
 # Turn every pipe symbol into a comma.
 sed -i -e "s/|/,/g" "$CSV_FILE"
