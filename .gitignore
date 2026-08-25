@@ -1,3 +1,5 @@
 api/
 NationalFedCodes.txt
 *.csv
+*.csv-e
+.DS_Store

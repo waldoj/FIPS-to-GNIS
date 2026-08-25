@@ -1,25 +1,25 @@
 # FIPS to GNIS Conversion
 
-A list of every FIPS code (Census Code) and its corresponding GNIS ID. This is nothing but a long CSV file, listing only the IDs. This includes every FIPS code—not every GNIS ID—and is derived from [`NationalFedCodes_20140601.zip`](http://geonames.usgs.gov/docs/federalcodes/NationalFedCodes_20140601.zip) at the U.S. Board of Geographic Names' website. It's simply that file, with all data stripped out other than our two fields.
+A list of every GNIS feature ID and its corresponding FIPS code (Census code). This is nothing but a long CSV file, listing only the IDs. It's derived from [the USGS Federal Codes file](https://prd-tnm.s3.amazonaws.com/StagedProducts/GeographicNames/FederalCodes/FedCodes_AllStates_Text.zip), published by the U.S. Board on Geographic Names—simply that file, with all data stripped out other than our two fields.
 
 ## Query the API
 
-This data is available via an API, in the format `https://fipsgnis.com/FIPSCODE.json`, e.g. a query for for New York, New York, to [`https://fipsgnis.com/410494.json`](https://fipsgnis.com/410494.json), returns the following:
+This data is available via an API, in the format `https://fipsgnis.com/GNISID.json`. For example, a query for Hoopeston, Illinois (GNIS feature ID 410494), to [`https://fipsgnis.com/410494.json`](https://fipsgnis.com/410494.json), returns the following:
 
 ```json
 {
-  "fips": "410494",
-  "gnis": "36061"
+  "gnis": "410494",
+  "fips": "36061"
 }
 ```
 
 The API consists of static files hosted on S3, provided via CloudFront, so there's no need to be gentle—query all you need, at whatever rate you need. But if you prefer something local and faster, you can generate your own copy.
 
-It's not yet possible to query by GNIS ID, only by FIPS code. But [that's planned](https://github.com/waldoj/FIPS-to-GNIS/issues/3).
+It's only possible to query by GNIS feature ID, not by FIPS code. Reversing it requires namespacing the files, because 3,140 GNIS IDs are also valid FIPS codes and would collide. [That's planned](https://github.com/waldoj/FIPS-to-GNIS/issues/3).
 
 ## Generate Your Own CSV
 
-You can generate your own, more up-to-date version of this.
+You can generate your own copy of this.
 
 1. Clone or download this repository.
 2. Edit the included `run.sh` script to remove everything after `csv.sh`.
